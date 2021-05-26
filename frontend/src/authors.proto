@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package authors;
+
+service AuthorsController {
+    rpc findAllGRPC ( Empty ) returns ( AllAuthors );
+}
+
+message AllAuthors {
+    repeated Author authors = 1;
+}
+
+message Author {
+    int32 id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    int32 age = 4;
+    string biography = 5;
+    int32 numberOfBooks = 6;
+}
+
+message Empty {}
