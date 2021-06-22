@@ -6,12 +6,18 @@ services:
       - "8091:8080"
     expose:
       - "8091"
+    networks:
+      - mynet
+      
   books:
     build: ./books
     ports:
       - "8092:8080"
     expose:
       - "8080"
+    networks:
+      - mynet
+
   frontend:
     build: ./frontend
     ports:
@@ -22,6 +28,9 @@ services:
     links:
       - authors
       - books
+    networks:
+      - mynet
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
@@ -32,3 +41,8 @@ services:
       - authors
       - books
       - frontend
+    networks:
+      - mynet
+
+networks:
+  mynet:

@@ -18,25 +18,36 @@ const microserviceOptions = {
     },
 };
 
-const microserviceOptionsGRPC = {
-    transport: Transport.GRPC,
-    options: {
-        package: 'authors',
-        protoPath: join(__dirname, '../src/authors.proto'),
-    },
-};
+// const microserviceOptionsGRPC = {
+//     transport: Transport.GRPC,
+//     options: {
+//         package: 'authors',
+//         protoPath: join(__dirname, '../src/authors.proto'),
+//     },
+// };
+
+// const microserviceOptionsRMQ = {
+//     transport: Transport.RMQ,
+//     options: {
+//       urls: ['amqps://wpqgyuie:v7YBKXWWSA4ch4iK5oaZ_oqEiSFAIjcl@dove.rmq.cloudamqp.com/wpqgyuie'],
+//       queue: 'main_queue',
+//       noAck: false,
+//       queueOptions: {
+//         durable: false
+//       }
+//     }
+// };
 
 const microserviceOptionsRMQ = {
     transport: Transport.RMQ,
     options: {
-      urls: ['amqps://wpqgyuie:v7YBKXWWSA4ch4iK5oaZ_oqEiSFAIjcl@dove.rmq.cloudamqp.com/wpqgyuie'],
-      queue: 'main_queue',
-      noAck: false,
+      urls: [process.env.RABBIT_MQ_URL || 'amqp://rabbitmq:5672'],
+      queue: process.env.AUTHORS_QUEUE || 'authors',
       queueOptions: {
         durable: false
-      }
-    }
-};
+      },
+    },
+  };
 
 async function bootstrap() {
     const app = await NestFactory.createMicroservice(AppModule, microserviceOptionsRMQ /*microserviceOptions, microserviceOptionsGRPC*/);

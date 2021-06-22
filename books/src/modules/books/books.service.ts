@@ -56,4 +56,16 @@ export class BooksService {
   public createBook(book: Book) {
       return this.books.set(book.id ?? this.idCounter++, book)
   }
+
+  public deleteBooksByAuthor(authorId: number): void {
+    this.getBooks().forEach(book => {
+      if (book.authorId === authorId) {
+        this.delete(book.id);
+      }
+    })
+  }
+
+  public delete(id: number): void{
+    this.books.delete(id);
+  }
 }
