@@ -15,7 +15,7 @@ export class BooksController {
 
     private idCounter: number = 10;
   constructor(private readonly booksService: BooksService,
-     @Inject('BOOK_SERVICE') private readonly rmqClient: ClientProxy) {
+     @Inject('AUTHORS_CLIENT') private readonly rmqClient: ClientProxy) {
   }
 
   //TODO implement Rest controller

@@ -12,7 +12,7 @@ export class AuthorsService {
       1,
       new Author(1)
         .withFirstName('Loreth Anne')
-        .withLastName('White')
+        .withLastName('White11')
         .withAge(60)
         .withBiography('Loreth Anne White Bio')
         .withNumberOfBooks(2),
